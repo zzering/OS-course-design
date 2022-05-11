@@ -164,8 +164,7 @@ void menu()
     printf("请输入调度请求数量:\n");
     scanf("%d", &b);
     printf("请依次输入请求的磁道序列:\n");
-    for (i = 0; i < b; i++)
-    {
+    for (i = 0; i < b; i++){
         scanf("%d", &cidao[i]);
     }
     printf("磁道读取结果:\n");
