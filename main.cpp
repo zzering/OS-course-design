@@ -5,7 +5,7 @@
 #define MAX 100
 using namespace std;
 
-//ÇóÆ½¾ùÑ°µÀ³¤¶È
+//æ±‚å¹³å‡å¯»é“é•¿åº¦
 double average(int* length, int n) {
 	double sum = 0;
 	int i;
@@ -17,47 +17,47 @@ double average(int* length, int n) {
 void show(int num, int next[], int length[])
 {
 	int i;
-	cout << endl << "ÏÂÒ»¸ö´ÅµÀ"<<"\t\t\t" << "ÒÆ¶¯¾àÀë" << endl;
+	cout << endl << "ä¸‹ä¸€ä¸ªç£é“"<<"\t\t\t" << "ç§»åŠ¨è·ç¦»" << endl;
 	for (i = 0; i < num; i++) {
 		cout << next[i] << "\t\t\t\t" << length[i] << endl;
 	}
-	cout << "Æ½¾ùÑ°µÀ³¤¶È:";
-	printf("%.2f\n\n", average(length, num));//Êä³öÁ½Î»floatºóµÄĞ¡Êı
+	cout << "å¹³å‡å¯»é“é•¿åº¦:";
+	printf("%.2f\n\n", average(length, num));//è¾“å‡ºä¸¤ä½floatåçš„å°æ•°
 }
 
-//ÏÈÀ´ÏÈ·şÎñËã·¨
+//å…ˆæ¥å…ˆæœåŠ¡ç®—æ³•
 void first_come_first_server(int* a, int n, int now) {
 	int i, j = 0;
-	int num = n;//µ÷¶ÈÇëÇóÊıÄ¿
+	int num = n;//è°ƒåº¦è¯·æ±‚æ•°ç›®
 	int next[MAX], length[MAX];
 	int visit[MAX] = { 0 };
 	while (num--){
 		for (i = 0; i < n; i++) {
-			//Ê¡ÂÔÒÑ´¦ÀíµÄÇëÇó
+			//çœç•¥å·²å¤„ç†çš„è¯·æ±‚
 			if (visit[i]){
 				continue;
 			}
 			else {
-				length[j] = abs(a[i] - now);//abs¾ø¶ÔÖµ
+				length[j] = abs(a[i] - now);//absç»å¯¹å€¼
 				next[j++] = a[i];
 				visit[i] = 1;
-				now = a[i];//¸üĞÂnowÖµ
+				now = a[i];//æ›´æ–°nowå€¼
 			}
 		}
 	}
 	show(n, next, length);
 }
-//×î¶ÌÑ°µÀÊ±¼äÓÅÏÈËã·¨
+//æœ€çŸ­å¯»é“æ—¶é—´ä¼˜å…ˆç®—æ³•
 void shortest_seek_time_first(int* a, int n, int now) {
 	int i, min, j = 0;
-	int flag;//µ±Ç°×î¶ÌÂ·¾¶µÄÏÂ±ê
+	int flag;//å½“å‰æœ€çŸ­è·¯å¾„çš„ä¸‹æ ‡
 	int t = n;
 	int next[MAX], length[MAX];
-	int visit[MAX] = { 0 };//·ÃÎÊÊı×é£¬ÒÑ¾­·ÃÎÊ¹ıµÄÎª1
-	//Ñ°µÀn´Î
+	int visit[MAX] = { 0 };//è®¿é—®æ•°ç»„ï¼Œå·²ç»è®¿é—®è¿‡çš„ä¸º1
+	//å¯»é“næ¬¡
 	while (t--) {
-		min = 9999999;//Ã¿´ÎÑ­»·½«minÖØÖÃ
-		//ÕÒÃ»ÓĞ·ÃÎÊ¹ıµÄÖĞ×î½üµÄ
+		min = 9999999;//æ¯æ¬¡å¾ªç¯å°†miné‡ç½®
+		//æ‰¾æ²¡æœ‰è®¿é—®è¿‡çš„ä¸­æœ€è¿‘çš„
 		for (i = 0; i < n; i++) {
 			if (visit[i])
 				continue;
@@ -66,68 +66,68 @@ void shortest_seek_time_first(int* a, int n, int now) {
 				min = abs(a[i] - now);
 			}
 		}
-		length[j] = min;//ÒÆ¶¯µÄ¾àÀë
-		next[j++] = a[flag];//ÏÂÒ»¸ö±»·ÃÎÊµÄ´ÅµÀºÅ
-		visit[flag] = 1;//·ÃÎÊ¹ıµÄÖÃ1
-		now = a[flag];//´ÅµÀÒÆ¶¯µ½µ±Ç°Î»ÖÃ
+		length[j] = min;//ç§»åŠ¨çš„è·ç¦»
+		next[j++] = a[flag];//ä¸‹ä¸€ä¸ªè¢«è®¿é—®çš„ç£é“å·
+		visit[flag] = 1;//è®¿é—®è¿‡çš„ç½®1
+		now = a[flag];//ç£é“ç§»åŠ¨åˆ°å½“å‰ä½ç½®
 	}
 	show(n, next, length);
 }
 
-//É¨ÃèËã·¨
+//æ‰«æç®—æ³•
 void scan(int* a, int n, int now) {
-	int i, flag = 0, j = 0;//flagÊÇµ±Ç°´ÅµÀÏÂ±ê
-	//±ÜÃâ¸Ä±äÔ­Ê¼ĞòÁĞ,Ó°ÏìºóÃæµÄËã·¨
+	int i, flag = 0, j = 0;//flagæ˜¯å½“å‰ç£é“ä¸‹æ ‡
+	//é¿å…æ”¹å˜åŸå§‹åºåˆ—,å½±å“åé¢çš„ç®—æ³•
 	int temp_a[MAX];
 	for (int j = 0; j < n; j++) {
 		temp_a[j] = a[j];
 	}
 	int next[MAX], length[MAX];
-	sort(temp_a, temp_a + n);//´ÓĞ¡µ½´óÅÅĞò
-	//Ñ°ÕÒ¿ªÊ¼´ÅµÀ
+	sort(temp_a, temp_a + n);//ä»å°åˆ°å¤§æ’åº
+	//å¯»æ‰¾å¼€å§‹ç£é“
 	for (i = 0; i < n; i++) {
 		if (temp_a[i] >= now) {
 			flag = i;
 			break;
 		}
 	}
-	//ÍùµİÔö·½Ïò·ÃÎÊ
+	//å¾€é€’å¢æ–¹å‘è®¿é—®
 	for (i = flag; i < n; i++) {
 		next[j] = temp_a[i];
 		length[j++] = abs(temp_a[i] - now);
-		now = temp_a[i];//´ÅµÀÒÆ¶¯µ½µ±Ç°Î»ÖÃ
+		now = temp_a[i];//ç£é“ç§»åŠ¨åˆ°å½“å‰ä½ç½®
 	}
-	//»ØÀ´Íùµİ¼õ·½Ïò·ÃÎÊ
+	//å›æ¥å¾€é€’å‡æ–¹å‘è®¿é—®
 	for (i = flag - 1; i >= 0; i--) {
 		next[j] = temp_a[i];
 		length[j++] = abs(temp_a[i] - now);
-		now = temp_a[i];//´ÅµÀÒÆ¶¯µ½µ±Ç°Î»ÖÃ
+		now = temp_a[i];//ç£é“ç§»åŠ¨åˆ°å½“å‰ä½ç½®
 	}
 	show(n, next, length);
 }
 
 void circle_scan(int* a, int n, int now) {
 	int i, flag = 0, j = 0;
-	//±ÜÃâ¸Ä±äÔ­Ê¼ĞòÁĞ,Ó°ÏìºóÃæµÄËã·¨
+	//é¿å…æ”¹å˜åŸå§‹åºåˆ—,å½±å“åé¢çš„ç®—æ³•
 	int temp_a[MAX];
 	for (int j = 0; j < n; j++) {
 		temp_a[j] = a[j];
 	}
 	int next[MAX], length[MAX];
-	sort(temp_a, temp_a + n);//´ÓĞ¡µ½´óÅÅĞò
+	sort(temp_a, temp_a + n);//ä»å°åˆ°å¤§æ’åº
 	for (i = 0; i < n; i++) {
 		if (temp_a[i] >= now) {
 			flag = i;
 			break;
 		}
 	}
-	//ÍùµİÔö·½Ïò·ÃÎÊ
+	//å¾€é€’å¢æ–¹å‘è®¿é—®
 	for (i = flag; i < n; i++) {
 		next[j] = temp_a[i];
 		length[j++] = abs(temp_a[i] - now);
 		now = temp_a[i];
 	}
-	//Ñ­»·ÍùµİÔö·½Ïò·ÃÎÊ
+	//å¾ªç¯å¾€é€’å¢æ–¹å‘è®¿é—®
 	for (i = 0; i < flag; i++) {
 		next[j] = temp_a[i];
 		length[j++] = abs(temp_a[i] - now);
@@ -136,20 +136,20 @@ void circle_scan(int* a, int n, int now) {
 	show(n, next, length);
 }
 
-//ÊÊÓÃÓÚÀÁ¹·µÄÊäÈëº¯Êı
+//é€‚ç”¨äºæ‡’ç‹—çš„è¾“å…¥å‡½æ•°
 void lazyDogInput(int a[],int &num)
 {
 	int i,order;
-	cout << "ÇëÑ¡ÔñÊä³ö´ÅµÀÇëÇóĞòÁĞ·½Ê½:\n";
-	cout << "1.Ëæ»úÉú³É:\n";
-	cout << "2.Éú³ÉÖ¸¶¨ĞòÁĞ:\n";
-	cout << "3.ÊÖ¶¯ÊäÈëĞòÁĞ:\n";
+	cout << "è¯·é€‰æ‹©è¾“å‡ºç£é“è¯·æ±‚åºåˆ—æ–¹å¼:\n";
+	cout << "1.éšæœºç”Ÿæˆ:\n";
+	cout << "2.ç”ŸæˆæŒ‡å®šåºåˆ—:\n";
+	cout << "3.æ‰‹åŠ¨è¾“å…¥åºåˆ—:\n";
 	cin >> order;
 	switch (order) {
 	case 1:
-		cout << "ÇëÊäÈë´ÅµÀÊı£º" << endl;
+		cout << "è¯·è¾“å…¥ç£é“æ•°ï¼š" << endl;
 		cin >> num;
-		cout << "Éú³ÉËæ»ú´ÅµÀ£º" << endl;
+		cout << "ç”Ÿæˆéšæœºç£é“ï¼š" << endl;
 		srand((int)time(0));
 		for (i = 0; i < num; i++) {
 			a[i] = rand() % 100;
@@ -160,19 +160,19 @@ void lazyDogInput(int a[],int &num)
 		num = 14;
 		a[0] = 30; a[1] = 50; a[2] = 100; a[3] = 180; a[4] = 20; a[5] = 90; a[6] = 150;
 		a[7] = 70; a[8] = 80; a[9] = 10; a[10] = 160; a[11] = 120; a[12] = 40; a[13] = 110;
-		cout << "´ÅµÀĞòÁĞÎª£º" << endl;
+		cout << "ç£é“åºåˆ—ä¸ºï¼š" << endl;
 		for (i = 0; i < num; i++) {
 			cout << a[i] << "  ";
 		}
 		break;
 	case 3:
-		cout << "ÇëÊäÈë´ÅµÀÊı£º" << endl;
+		cout << "è¯·è¾“å…¥ç£é“æ•°ï¼š" << endl;
 		cin >> num;
-		cout << "ÇëÒÀ´ÎÊäÈë´ÅµÀĞòÁĞ£º" << endl;
+		cout << "è¯·ä¾æ¬¡è¾“å…¥ç£é“åºåˆ—ï¼š" << endl;
 		for (i = 0; i < num; i++) {
 			cin>>a[i];
 		}
-		cout << "´ÅµÀĞòÁĞÎª£º" << endl;
+		cout << "ç£é“åºåˆ—ä¸ºï¼š" << endl;
 		for (i = 0; i < num; i++) {
 			cout << a[i] << "  ";
 		}
@@ -182,46 +182,40 @@ void lazyDogInput(int a[],int &num)
 
 int main() {
 	do {
-		system("cls");
-		int a[MAX];//´æ·ÅÒªÓÃµ½µÄ´ÅµÀºÅ
-		int start;//¿ªÊ¼µÄ´ÅµÀ
+		int a[MAX];//å­˜æ”¾è¦ç”¨åˆ°çš„ç£é“å·
+		int start;//å¼€å§‹çš„ç£é“
 		int n, i, flag = 1;
 		lazyDogInput(a, n);
-		cout << endl << "¿ªÊ¼µÄ´ÅµÀ£º" << endl;
+		cout << endl << "å¼€å§‹çš„ç£é“ï¼š" << endl;
 		cin >> start;
-		//´ÅÅÌµ÷¶ÈÄ¿Â¼
+		//ç£ç›˜è°ƒåº¦ç›®å½•
 		while (flag) {
-			system("cls");
-			cout << "ÇëÑ¡Ò»ÖÖ´ÅÅÌµ÷¶ÈËã·¨£º" << endl;;
-			cout << "1.ÏÈÀ´ÏÈ·şÎñÑ°µÀËã·¨" << endl;
-			cout << "2.×î¶ÌÑ°µÀÊ±¼äÓÅÏÈ" << endl;
-			cout << "3.É¨ÃèËã·¨" << endl;
-			cout << "4.Ñ­»·É¨ÃèËã·¨" << endl;
-			cout << "0.·µ»Ø" << endl;
+			cout << "è¯·é€‰ä¸€ç§ç£ç›˜è°ƒåº¦ç®—æ³•ï¼š" << endl;;
+			cout << "1.å…ˆæ¥å…ˆæœåŠ¡å¯»é“ç®—æ³•" << endl;
+			cout << "2.æœ€çŸ­å¯»é“æ—¶é—´ä¼˜å…ˆ" << endl;
+			cout << "3.æ‰«æç®—æ³•" << endl;
+			cout << "4.å¾ªç¯æ‰«æç®—æ³•" << endl;
+			cout << "0.è¿”å›" << endl;
 			cin >> flag;
-			cout << "´ÅµÀĞòÁĞ:\n";
+			cout << "ç£é“åºåˆ—:\n";
 			if (flag) {
 				for (i = 0; i < n; i++) {
 					cout << a[i] << "  ";
 				}
-				cout << "\n¿ªÊ¼µÄ´ÅµÀ£º" << start << endl;
+				cout << "\nå¼€å§‹çš„ç£é“ï¼š" << start << endl;
 			}
 			switch (flag) {
 			case 1:
 				first_come_first_server(a, n, start);
-				system("pause");
 				break;
 			case 2:
 				shortest_seek_time_first(a, n, start);
-				system("pause");
 				break;
 			case 3:
 				scan(a, n, start);
-				system("pause");
 				break;
 			case 4:
 				circle_scan(a, n, start);
-				system("pause");
 				break;
 			case 0:break;
 			}
