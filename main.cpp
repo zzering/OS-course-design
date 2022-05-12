@@ -56,7 +56,7 @@ void shortest_seek_time_first(int* a, int n, int now) {
 	int visit[MAX] = { 0 };//访问数组，已经访问过的为1
 	//寻道n次
 	while (t--) {
-		min = 999999;//每次循环将min重置
+		min = 9999999;//每次循环将min重置
 		//找没有访问过的中最近的
 		for (i = 0; i < n; i++) {
 			if (visit[i])
