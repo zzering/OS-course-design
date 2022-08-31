@@ -133,7 +133,7 @@ Make成功
  文件路径: /oslab/
  终端执行 run命令
  ![img](img/clip_image020.jpg)
- 
+
 
 为linux-0.11新增调用号
  文件路径: 虚拟机中/usr/include/unistd.h(也可以挂载后在图形界面中修改)
@@ -151,9 +151,7 @@ gcc运行 成功输出案例文字
 
 ###### 3.程序运行情况及截图
 
-![img](img/clip_image030.jpg)
-
- 
+ ![image-20220831174424416](img/image-20220831174424416.png)
 
 
 
