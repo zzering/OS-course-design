@@ -199,8 +199,9 @@ void shell()
 		{
 			cout << cmd << ": command not found\n";
 		}
-		cin.get();
-		system("clear");
+		//2022.9.21 modify
+		//cin.get();
+		//system("clear");
 	} while (1);
 }
 
